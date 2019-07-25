@@ -1,5 +1,13 @@
-<score-board></score-board>
+<score-board 
+    [game]="game"></score-board>
+<overview-box 
+    [frame]="currentFrame" 
+    (undo)="undoTriggered()" 
+    (giveUp)="giveUpTriggered()" 
+    (changePlayer)="changePlayerTriggered()"></overview-box>
 
-<ball-selection-box></ball-selection-box>
+<ball-selection-box 
+    (ballPocketed)="ballPocketed($event)"></ball-selection-box>
 
-<foul-selection-box></foul-selection-box>
+<foul-selection-box 
+    (foulCommitted)="foulCommitted($event)"></foul-selection-box>

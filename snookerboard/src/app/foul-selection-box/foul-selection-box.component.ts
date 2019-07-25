@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FoulAction } from '../model/foul-action';
 
 @Component({
   selector: 'foul-selection-box',
@@ -7,7 +8,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 })
 export class FoulSelectionBoxComponent implements OnInit {
 
-  foulTriggered: EventEmitter<number> = new EventEmitter();
+  @Output()
+  foulCommitted: EventEmitter<FoulAction> = new EventEmitter();
 
   constructor() { }
 
@@ -15,7 +17,7 @@ export class FoulSelectionBoxComponent implements OnInit {
   }
 
   foulSelected(score: number) {
-    this.foulTriggered.emit(score);
+    this.foulCommitted.emit(new FoulAction(score));
   }
 
 }

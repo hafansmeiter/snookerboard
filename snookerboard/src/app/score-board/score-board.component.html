@@ -1,9 +1,11 @@
-<div>
-  <span>{{ game.player1.name }}</span>
-  <span>{{ frame.scorePlayer1 }}</span>
-  <span>{{ game.framesPlayer1 }}</span>
-  <span>{{ game.bestOf }}</span>
-  <span>{{ game.framesPlayer2 }}</span>
-  <span>{{ frame.scorePlayer2 }}</span>
-  <span>{{ game.player2.name }}</span>
+<div *ngIf="game">
+  <span *ngIf="game.currentPlayer == game.player1">x</span>
+  {{ game.player1.name }}
+  {{ game.currentFrame.scorePlayer1 }}
+  {{ game.framesPlayer1 }}
+  {{ game.bestOf }}
+  {{ game.framesPlayer2 }}
+  {{ game.currentFrame.scorePlayer2 }}
+  {{ game.player2.name }}
+  <span *ngIf="game.currentPlayer == game.player2">x</span>
 </div>

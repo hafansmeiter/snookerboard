@@ -1,13 +1,11 @@
 import { Action } from './action';
+import { Player } from './player';
+import { Frame } from './frame';
 
 export class GiveUpAction extends Action {
 
-    public apply(): void {
+    public apply(frame: Frame, player: Player): void {
         
     }    
     
-    public undo(): void {
-        throw new Error("Undo not allowed.");
-    }
-
 }

@@ -6,11 +6,7 @@ export abstract class ScoreAction extends Action {
 
     protected abstract score: number;
 
-    public apply(): void {
-        this.frame.score(this.player, this.score);
+    public apply(frame: Frame, player: Player): void {
+        frame.score(player, this.score);
     }
-
-    public undo(): void {
-        this.frame.score(this.player, -this.score);
-    }    
 }
