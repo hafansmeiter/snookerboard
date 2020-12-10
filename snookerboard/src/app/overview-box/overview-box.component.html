@@ -2,9 +2,13 @@
   <div>
     <h3>Übersicht:</h3>
   </div>
-  Vorsprung: {{ frame.ahead }}
-  Zu erreichen: {{ frame.remaining }}
-  <p-button (onClick)="undoTriggered()" label="Rückgängig"></p-button>
-  <p-button (onClick)="changePlayerTriggered()" label="Spielerwechsel"></p-button>
-  <p-button (onClick)="giveUpTriggered()" label="Aufgeben"></p-button>
+  <div>
+    Vorsprung: {{ frame.ahead }}
+    Zu erreichen: {{ frame.remaining }}
+  </div>
+  <div>
+    <p-button (onClick)="undoTriggered()" label="Rückgängig"></p-button>
+    <p-button (onClick)="changePlayerTriggered()" label="Spielerwechsel"></p-button>
+    <p-button (onClick)="giveUpTriggered()" label="Aufgeben"></p-button>
+  </div>
 </div>

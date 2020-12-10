@@ -1,38 +1,64 @@
 import { Player } from './player';
 import { Game } from './game';
-import { ActionCommand } from './action-command';
 import { Action } from './action';
-import { RemainingBalls } from './remaining-balls';
+import { History } from './history';
+import { State } from './state';
 
 export class Frame {
     scorePlayer1: number = 0;
     scorePlayer2: number = 0;
+    state: State = new State();
+    history: History = new History();
 
-    ahead: number = 0;
-    remaining: number = 147;
-    remainingBalls: RemainingBalls = new RemainingBalls();
+    get ahead() {
+        return Math.abs(this.scorePlayer1 - this.scorePlayer2);
+    }
 
-    commands: ActionCommand[] = []
-
+    get remaining() {
+        let score = 0;
+        if (this.state.isEndGame) {
+            let i = Math.max(2, this.state.highestEndgameScore + 1);
+            while (i <= 7) {
+                score += i;
+                i++;
+            }
+        } else {
+            score += this.state.remainingBalls.redBalls * 8 + 27;
+            if (this.state.isColorBall) {
+                score += 7;
+            }
+        }
+        return score;
+    }
+    
     constructor(private game: Game) {
     }
-
+    
     addAction(action: Action): void {
-        this.commands.push(new ActionCommand(this, this.game.currentPlayer, action));
+        this.history.addAction(this, this.game.currentPlayer, action);
         this.updateScore();
     }
-
+    
     removeLastAction(): void {
-        this.commands.pop();
+        this.history.removeLastAction();
         this.updateScore();
     }
-
-    updateScore(): void {
+    
+    resetMove() {
+      this.state.resetMove();
+    }
+    
+    private updateScore(): void {
+        this.reset();
+        this.history.execute();
+    }
+    
+    private reset(): void {
+        this.state.reset();
         this.resetScore();
-        this.commands.forEach(c => c.execute());
     }
 
-    resetScore(): void {
+    private resetScore(): void {
         this.scorePlayer1 = 0;
         this.scorePlayer2 = 0;
     }
@@ -40,19 +66,22 @@ export class Frame {
     score(player: Player, score: number): void {
         if (player == this.game.player1) {
             this.scorePlayer1 += score;
-            if (this.scorePlayer1 < 0) {
-                this.scorePlayer1 = 0;
-            }
         } else {
             this.scorePlayer2 += score;
-            if (this.scorePlayer2 < 0) {
-                this.scorePlayer2 = 0;
-            }
         }
     }
 
-    removeRedBall(): void {
-        this.remainingBalls.redBalls--;
+    scoreOpposite(player: Player, score: number): void {
+        this.score(player == this.game.player1 ? 
+            this.game.player2 : this.game.player1, score);
+    }
+
+    pocketRedBall(): void {
+        this.state.pocketRedBall();
+    }
+
+    pocketColoredBall(score: number) {
+        this.state.pocketColorBall(score);
     }
 
     leader(): number {

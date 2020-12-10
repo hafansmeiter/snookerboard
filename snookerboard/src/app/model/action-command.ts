@@ -4,7 +4,7 @@ import { Frame } from './frame';
 
 export class ActionCommand {
 
-    constructor(private frame: Frame, private player: Player, private action: Action) {
+    constructor(private frame: Frame, public player: Player, public action: Action) {
     }
 
     public execute() {

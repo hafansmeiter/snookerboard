@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Action } from '../model/action';
 import { ScoreRedBallAction } from '../model/score-red-ball-action';
 import { ScoreYellowBallAction } from '../model/score-yellow-ball-action';
@@ -8,6 +8,7 @@ import { ScoreBlueBallAction } from '../model/score-blue-ball-action';
 import { ScorePinkBallAction } from '../model/score-pink-ball-action';
 import { ScoreBlackBallAction } from '../model/score-black-ball-action';
 import { ScoreAction } from '../model/score-action';
+import { Frame } from '../model/frame';
 
 @Component({
   selector: 'ball-selection-box',
@@ -16,6 +17,8 @@ import { ScoreAction } from '../model/score-action';
 })
 export class BallSelectionBoxComponent implements OnInit {
 
+  @Input() frame: Frame;
+  
   @Output()
   ballPocketed: EventEmitter<ScoreAction> = new EventEmitter<ScoreAction>()
   

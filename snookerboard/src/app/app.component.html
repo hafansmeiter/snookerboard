@@ -1,13 +1,15 @@
-<score-board 
-    [game]="game"></score-board>
-<overview-box 
-    [frame]="currentFrame" 
-    (undo)="undoTriggered()" 
-    (giveUp)="giveUpTriggered()" 
-    (changePlayer)="changePlayerTriggered()"></overview-box>
+<menubar (startNewGame)="startNewGame()"></menubar>
+<div *ngIf="game">
+    <score-board [game]="game"></score-board>
+    <overview-box [frame]="currentFrame" (undo)="undoTriggered()" (giveUp)="giveUpTriggered()" (changePlayer)="changePlayerTriggered()"></overview-box>
 
-<ball-selection-box 
-    (ballPocketed)="ballPocketed($event)"></ball-selection-box>
+    <ball-selection-box [frame]="currentFrame" (ballPocketed)="ballPocketed($event)"></ball-selection-box>
 
-<foul-selection-box 
-    (foulCommitted)="foulCommitted($event)"></foul-selection-box>
+    <foul-selection-box (foulCommitted)="foulCommitted($event)"></foul-selection-box>
+
+    <!--history-box [history]="currentFrame.history"></history-box>-->
+</div>
+
+<p-dialog header="Neues Spiel" position="top" [(visible)]="showNewGameDialog">
+    <new-game-box (newGameStarted)="newGame($event)"></new-game-box>
+</p-dialog>

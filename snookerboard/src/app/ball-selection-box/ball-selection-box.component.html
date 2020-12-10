@@ -2,11 +2,11 @@
   <div>
     <h3>Ball:</h3>
   </div>
-  <p-button (onClick)="redBallSelected()" label="Rot"></p-button>
-  <p-button (onClick)="yellowBallSelected()" label="Gelb"></p-button>
-  <p-button (onClick)="greenBallSelected()" label="Grün"></p-button>
-  <p-button (onClick)="brownBallSelected()" label="Braun"></p-button>
-  <p-button (onClick)="blueBallSelected()" label="Blau"></p-button>
-  <p-button (onClick)="pinkBallSelected()" label="Pink"></p-button>
-  <p-button (onClick)="blackBallSelected()" label="Schwarz"></p-button>
+  <p-button (onClick)="redBallSelected()" label="Rot" [disabled]="!frame.state.isRedBallAvailable()"></p-button>
+  <p-button (onClick)="yellowBallSelected()" label="Gelb" [disabled]="!frame.state.isYellowBallAvailable()"></p-button>
+  <p-button (onClick)="greenBallSelected()" label="Grün" [disabled]="!frame.state.isGreenBallAvailable()"></p-button>
+  <p-button (onClick)="brownBallSelected()" label="Braun" [disabled]="!frame.state.isBrownBallAvailable()"></p-button>
+  <p-button (onClick)="blueBallSelected()" label="Blau" [disabled]="!frame.state.isBlueBallAvailable()"></p-button>
+  <p-button (onClick)="pinkBallSelected()" label="Pink" [disabled]="!frame.state.isPinkBallAvailable()"></p-button>
+  <p-button (onClick)="blackBallSelected()" label="Schwarz" [disabled]="!frame.state.isBlackBallAvailable()"></p-button>
 </div>

@@ -7,8 +7,12 @@ export class FoulAction extends Action {
     constructor(public score: number) {
         super();
     }
-
+    
     public apply(frame: Frame, player: Player): void {
-        frame.score(player, -this.score);
+        frame.scoreOpposite(player, this.score);
+    }
+
+    public getDescription(): string {
+        return "Foul (" + this.score + "Punkte)";
     }
 }

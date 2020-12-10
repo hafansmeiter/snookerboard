@@ -1,0 +1,21 @@
+<div class="ui-container">
+  <div class="ui-g-12">
+    <span class="p-float-label">
+      <label for="float-input1">Spieler 1: </label>
+      <input id="float-input1" type="text" pInputText [(ngModel)]="namePlayer1"> 
+  </span>
+  </div>
+  <div class="ui-g-12">
+    <span class="p-float-label">
+      <label for="float-input2">Spieler 2: </label>
+      <input id="float-input2" type="text" pInputText [(ngModel)]="namePlayer2"> 
+  </span>
+  </div>
+  <div class="ui-g-12">
+    <label for="bestOf">Best Of: </label>
+    <p-spinner id="bestOf" [(ngModel)]="bestOf" [min]="1" [max]="99" [step]="2"></p-spinner>
+  </div>
+  <div>
+    <p-button label="Spiel starten" (onClick)="startGameClicked($event)"></p-button>
+  </div>
+</div>

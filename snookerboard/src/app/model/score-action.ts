@@ -8,5 +8,6 @@ export abstract class ScoreAction extends Action {
 
     public apply(frame: Frame, player: Player): void {
         frame.score(player, this.score);
+        frame.pocketColoredBall(this.score);
     }
 }

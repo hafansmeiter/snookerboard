@@ -12,16 +12,28 @@ import { Player } from './model/player';
 })
 export class AppComponent implements OnInit {
   title = 'Snookerboard';
+
+  showNewGameDialog: boolean = false;
   
   game: Game;
   currentFrame: Frame;
   
   constructor() {
-
   }
 
   ngOnInit(): void {
-    this.game = new Game(new Player("Daniel"), new Player("Luki"), 7);
+    // this.showNewGameDialog = true;
+    this.newGame(new Game(new Player("Dani", true), new Player("Luki", false), 7));
+  }
+
+  startNewGame(): void {
+    this.showNewGameDialog = true;
+  }
+
+  newGame(game: Game): void {
+    this.showNewGameDialog = false;
+    
+    this.game = game;
     this.currentFrame = this.game.currentFrame;
   }
 
@@ -39,6 +51,7 @@ export class AppComponent implements OnInit {
 
   changePlayerTriggered(): void {
     this.game.changePlayer();
+    this.currentFrame.resetMove();
   }
 
   giveUpTriggered(): void {
