@@ -19,6 +19,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { DialogModule } from 'primeng/dialog';
 import { ToolbarModule } from 'primeng/toolbar';
 //import { TimelineModule } from 'primeng/timeline';
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     ToolbarModule,
     BrowserAnimationsModule,
     FormsModule,
+    SliderModule,
     //TimelineModule
   ],
   providers: [],

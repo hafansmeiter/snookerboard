@@ -13,6 +13,7 @@ export class NewGameBoxComponent implements OnInit {
   namePlayer1: string = '';
   namePlayer2: string = '';
   bestOf: number = 3;
+  redBalls: number = 10
 
   @Output()
   newGameStarted = new EventEmitter<Game>();
@@ -25,7 +26,7 @@ export class NewGameBoxComponent implements OnInit {
   startGameClicked(event: any): void {
     let player1 = new Player(this.namePlayer1, true);
     let player2 = new Player(this.namePlayer2, false);
-    this.newGameStarted.emit(new Game(player1, player2, this.bestOf));
+    this.newGameStarted.emit(new Game(player1, player2, this.bestOf, this.redBalls));
   }
 
 }

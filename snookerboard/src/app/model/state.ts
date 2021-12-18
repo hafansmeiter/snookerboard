@@ -1,7 +1,7 @@
 import { RemainingBalls } from './remaining-balls';
 
 export class State {
-    remainingBalls: RemainingBalls = new RemainingBalls();
+    remainingBalls: RemainingBalls;
     isEndGame: boolean = false;
     isColorBall: boolean = false;
     isFinalColorBall: boolean = false;
@@ -15,6 +15,10 @@ export class State {
     isBlackBallAvailable(): boolean { return this.isColorBallPossible(7); }
     isColorBallPossible(score: number): boolean { return this.isEndGameColorBallPossible(score) || this.isColorBall; }
     isEndGameColorBallPossible(score: number): boolean { return this.isEndGame && Math.max(2, this.highestEndgameScore + 1) == score; }
+
+    constructor(redBalls: number) {
+        this.remainingBalls = new RemainingBalls(redBalls);
+    }
     
     pocketRedBall() {
         this.remainingBalls.removeRedBall();

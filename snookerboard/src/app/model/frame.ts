@@ -7,7 +7,7 @@ import { State } from './state';
 export class Frame {
     scorePlayer1: number = 0;
     scorePlayer2: number = 0;
-    state: State = new State();
+    state: State;
     history: History = new History();
 
     get ahead() {
@@ -31,7 +31,8 @@ export class Frame {
         return score;
     }
     
-    constructor(private game: Game) {
+    constructor(private game: Game, private redBalls: number) {
+        this.state = new State(redBalls);
     }
     
     addAction(action: Action): void {

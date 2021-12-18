@@ -8,14 +8,15 @@ export class Game {
     currentFrame: Frame;
     currentPlayer: Player;
 
-    constructor(public player1: Player, public player2: Player, public bestOf: number) {
+    constructor(public player1: Player, public player2: Player, 
+                public bestOf: number, public redBalls: number) {
         this.currentPlayer = player1;
         this.newFrame();
     }
 
     public newFrame(): Frame {
         this.finishFrame();
-        this.currentFrame = new Frame(this);
+        this.currentFrame = new Frame(this, this.redBalls);
         return this.currentFrame;
     }
 

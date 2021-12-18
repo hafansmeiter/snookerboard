@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.showNewGameDialog = true;
-    this.newGame(new Game(new Player("Dani", true), new Player("Luki", false), 7));
+    this.newGame(new Game(new Player("Dani", true), new Player("Luki", false), 5, 10));
   }
 
   startNewGame(): void {
