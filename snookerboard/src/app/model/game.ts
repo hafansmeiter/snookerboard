@@ -35,5 +35,6 @@ export class Game {
 
     public changePlayer(): void {
         this.currentPlayer = this.currentPlayer == this.player1 ? this.player2 : this.player1;
+        this.currentFrame.doPlayerChange(this.currentPlayer);
     }
 }

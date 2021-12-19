@@ -38,6 +38,13 @@ export class State {
             this.isEndGame = true;
         }
     }
+
+    doPlayerChange() {
+        if (this.isFinalColorBall) {
+            this.isEndGame = true;
+            this.isColorBall = false;
+        }
+    }
     
     resetMove() {
         this.isColorBall = false;

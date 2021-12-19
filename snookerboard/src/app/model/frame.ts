@@ -3,6 +3,7 @@ import { Game } from './game';
 import { Action } from './action';
 import { History } from './history';
 import { State } from './state';
+import { PlayerChangeAction } from './player-change-action';
 
 export class Frame {
     scorePlayer1: number = 0;
@@ -33,6 +34,11 @@ export class Frame {
     
     constructor(private game: Game, private redBalls: number) {
         this.state = new State(redBalls);
+    }
+
+    doPlayerChange(currentPlayer: Player): void {
+        this.history.addAction(this, currentPlayer, new PlayerChangeAction(currentPlayer));
+        this.state.doPlayerChange();
     }
     
     addAction(action: Action): void {
