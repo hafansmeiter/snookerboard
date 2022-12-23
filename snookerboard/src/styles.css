@@ -1,286 +1,415 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;500;600;700&display=swap');
 
 :root {
-    --green: #2ecc71;
+    --green: #bdffdb;
 }
 
 * {
     margin: 0;
     padding: 0;
-    outline: none;
-}
-
-body {
-    font-family: 'Barlow Semi Condensed', sans-serif;
-    font-size: 2vw;
+    outline: none !important;
+    font-family: 'Barlow Semi Condensed', sans-serif !important;
+    font-size: calc(1.25vw + 1.25vh);
     font-weight: 500;
+    transition: 0.3s !important;
     color: #222;
-    background-color: var(--green);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    padding-top: 1vw;
-    letter-spacing: 1px;
 }
 
-button {
-    height: 3em;
+body, app-root {
+    display: grid;
+    place-content: center;
+    background-color: var(--green);
+    height: 100vh;
+    position: relative;
+    z-index: -1;
+}
+
+button.ui-button {
+    padding: 0.6em; 
+}
+
+button.ui-button:focus { 
+    outline: none; 
+}
+
+body .ui-toolbar {
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid #0002;
-    font-family: 'Barlow Semi Condensed', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: #222;
-    cursor: pointer;
     padding: 0;
-    margin: 0 1.5em;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.p-toolbar-group-right {
+    height: unset;
+    position: fixed;
+    bottom: 5vh;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.p-toolbar-group-right .ui-button {
+    font-size: 0.8em;
+    border-bottom: none;
+    padding: 0;
+    position: relative;
+}
+
+.p-toolbar-group-right .ui-button:enabled:hover {
+    background-color: transparent;
+}
+
+.p-toolbar-group-right .ui-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: #222;
+    width: 100%;
     transition: 0.3s;
 }
 
-button.ui-state-disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    filter: saturate(0);
+.p-toolbar-group-right .ui-button:enabled:hover::after {
+    bottom: -0.25em;
 }
 
-button.ui-state-disabled:hover {
-    transform: scale(1);
+.p-toolbar-group-right button span {
+    display: none; 
 }
 
-button:hover {
-    color: #fff;
-    border-color: #fff;
+.p-toolbar-group-right button .ui-button-text.ui-clickable {
+    font-size: 0.6rem;
+    padding: 0.5em 0 0.5em 0;
 }
 
-.ui-widget-header button {
-    border: 3px solid #0002;
-    border-radius: 1vw;
-    padding: 0 1em;
+body .ui-button {
+    border: none;
+    background-color: transparent;
 }
 
-.ui-widget-header button:hover {
-    border-color: #fff;
+body .ui-corner-all {
+    border-radius: 0;
 }
 
 .ng-star-inserted {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-h3 {
-    font-size: 0.7em;
-    margin-bottom: 0.25em;
-}
-
-.ui-widget-header {
-    position: absolute;
-    top: 2vw;
-}
+/*
+    S C O R E B O A R D
+*/
 
 #scoreboard {
     position: relative;
-    width: 70vw;
-    height: 2.5em;
-    line-height: 1em;
-    background-color: #fff;
-    border-radius: 1vw;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.5em;
-    box-shadow: 0 4vw 4vw -2vw #0007;
-    padding: 0 0.75em 0 0.75em;
-    margin: 1em 0;
+    align-items: baseline;
+    width: calc(50vw + 50vh);
+    max-width: 80vw;
+    height: 4em;
+    padding-top: 0.175em;
+    background-color: #fff;
+    margin-bottom: 5vh;
     overflow: hidden;
+    box-shadow: 0 3vw 6vw -3vw #0006;
 }
 
-.bestOf {
-    font-size: 0.6em;
-    font-weight: 600;
-    transform: translateY(0.15em);
-    margin: 0 -0.75em;
+#scoreboard * {
+    font-size: 2em;
+}
+
+.currentPlayer {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    background-color: #fffa;
+    transition: 0.3s;
+}
+
+.currentPlayer:last-child {
+    position: absolute;
+    right: unset;
+    left: 0;
 }
 
 .player1Name, .player2Name {
-    font-weight: 600;
-    text-align: left;
-    width: 21vw;
-    transform: translateX(0.75em);
-    letter-spacing: 1px;
+    flex-grow: 1;
+    width: 5.75em;
+    padding: 0.25em 0 0 0.75em;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    overflow: hidden; 
 }
 
 .player2Name {
     text-align: right;
-    transform: translateX(-0.75em);
+    padding: 0.25em 0.75em 0 0;
 }
 
-.currentPlayer {
+#scoreboard .bestOf {
+    font-size: 1.2em;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    margin: 0 -1em;
+}
+
+#scoreboard .bestOf::before {
+    content: '';
     position: absolute;
-    background-color: red;
-    height: 0.4em;
-    width: 0.4em;
-    border-radius: 999px;
-    transform: translateY(0em);
+    top: -100%;
+    height: 200%;
+    width: 5.2em;
+    background-color: #222;
+    z-index: -1;
 }
 
-.currentFramePoints {
+#scoreboard .frames {
     width: 2em;
-    height: 100%;
-    line-height: 2.5em;
-    border: 3px solid var(--green);
+    z-index: 5;
+    padding: 0 0.5em;
     text-align: center;
 }
 
-.frames {
-    margin: 0;
-}
-
-overview-box {
-    margin-bottom: 1em;
+#scoreboard .bestOf, #scoreboard .frames {
+    font-weight: 300;
     color: #fff;
-    z-index: 999;
+    height: 200%;
 }
 
-overview-box button {
+.currentFramePoints {
+    padding: 0 0.5em 0 0;
+    width: 2em;
+    text-align: right;
+}
+
+.currentFramePoints:nth-child(n+6) {
+    text-align: left;
+    padding: 0 0 0 0.5em;
+}
+
+/*
+    B A L L S
+*/
+
+ball-selection-box {
+    padding: 1em 0;
+    margin: 1.5em 0;
     position: relative;
 }
 
-overview-box button:hover {
-    border-color: #0002;
+ball-selection-box, ball-selection-box > div, foul-selection-box, foul-selection-box > div, overview-box, overview-box > div {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
 }
 
-overview-box button::after {
+ball-selection-box div div:first-child {
+    display: none;
+}
+
+ball-selection-box p-button button.ui-button::after, ball-selection-box p-button[ng-reflect-disabled=true] button.ui-button:hover::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    width: 0;
-    background-color: #fff;
-    border: none;
-    transform: translateY(3px);
+    bottom: -7%;
+    width: 70%;
+    height: 15%;
+    border-radius: 50%;
+    background-color: #0000;
+    z-index: -1;
     transition: 0.3s;
 }
 
-overview-box button:hover::after {
-    width: 100%;
+ball-selection-box p-button button.ui-button:hover::after {
+    bottom: -17.5%;
+    width: 80%;
+    height: 20%;
+    background-color: #0000;
+    z-index: -1;
 }
 
-overview-box div div:nth-child(3n) {
+ball-selection-box p-button button.ui-button::before {
+    content: '';
     position: absolute;
-    top: 2vw;
+    right: 25%;
+    top: 25%;
+    width: 15%;
+    height: 15%;
+    border-radius: 50%;
+    background-color: #fff;
 }
 
-overview-box * {
+ball-selection-box p-button button.ui-button span.ui-button-text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    padding: 0 !important;
+    opacity: 0;
+    display: none;
+    transform: translateY(1em);
+}
+
+ball-selection-box p-button button.ui-button {
+    position: relative;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    box-shadow: 0 2.5em 1.5em -1.5em #0004;
 }
 
-overview-box h3 {
-    display: none;
+ball-selection-box p-button button.ui-button:hover {
+    transform: translateY(-1em);
+    box-shadow: 0 3em 2em -1em #0003;
+} 
+
+ball-selection-box p-button[ng-reflect-disabled=true] button.ui-button{
+    background-color: transparent !important;
+    border: 3px solid #0002;
+    opacity: 1;
+    box-shadow: none;
 }
 
-overview-box div div:nth-child(3n) {
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between;
-    margin-bottom: 0.5em;
+ball-selection-box p-button[ng-reflect-disabled=true] button.ui-button::before {
+    background-color: #0002;
 }
 
-ball-selection-box {
-    width: 60vw;
-    background-color: #fff;
-    border-radius: 1vw 1vw 0 0;
-    display: flex;
-    justify-content: center;
+ball-selection-box p-button[ng-reflect-disabled=true] button.ui-button:hover {
+    transform: translateY(0);
 }
 
-ball-selection-box > div {
-    margin: 1em 0;
+ball-selection-box p-button button.ui-button:hover span.ui-button-text {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-ball-selection-box div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+ball-selection-box p-button[label=Rot] button.ui-button, ball-selection-box p-button[label=Rot] button.ui-button:hover {
+    background-color: #cf000f;
 }
 
-ball-selection-box p-button button {
-    height: 3em;
-    width: 3em;
-    padding: 0;
-    background-size: contain;
-    text-indent: -99999px;
-    border: none;
-    margin: 0 0.5em;
+ball-selection-box p-button[label=Gelb] button.ui-button, ball-selection-box p-button[label=Gelb] button.ui-button:hover {
+    background-color: #ffd748;
 }
 
-ball-selection-box p-button button:hover {
-    background-color: transparent;
-    transform: translateY(-0.2em) scale(1.1);
+ball-selection-box p-button[label=Grün] button.ui-button, ball-selection-box p-button[label=Grün] button.ui-button:hover {
+    background-color: #00946f;
 }
 
-ball-selection-box p-button[label=Rot] button {
-    background-image: url('../images/redBall.png');
+ball-selection-box p-button[label=Braun] button.ui-button, ball-selection-box p-button[label=Braun] button.ui-button:hover {
+    background-color: #6e4040;
 }
 
-ball-selection-box p-button[label=Gelb] button {
-    background-image: url('../images/yellowBall.png');
+ball-selection-box p-button[label=Blau] button.ui-button, ball-selection-box p-button[label=Blau] button.ui-button:hover {
+    background-color: #0353ff;
 }
 
-ball-selection-box p-button[label=Grün] button {
-    background-image: url('../images/greenBall.png');
+ball-selection-box p-button[label=Pink] button.ui-button, ball-selection-box p-button[label=Pink] button.ui-button:hover {
+    background-color: #f77988;
 }
 
-ball-selection-box p-button[label=Braun] button {
-    background-image: url('../images/brownBall.png');
+ball-selection-box p-button[label=Schwarz] button.ui-button, ball-selection-box p-button[label=Schwarz] button.ui-button:hover {
+    background-color: #111122;
 }
 
-ball-selection-box p-button[label=Blau] button {
-    background-image: url('../images/blueBall.png');
-}
-
-ball-selection-box p-button[label=Pink] button {
-    background-image: url('../images/pinkBall.png');
-}
-
-ball-selection-box p-button[label=Schwarz] button {
-    background-image: url('../images/blackBall.png');
-}
+/*
+    F O U L S
+*/
 
 foul-selection-box {
-    width: 60vw;
-    background-color: #fff;
-    border-radius: 0 0 1vw 1vw;
-    padding: 0.5em 0 1em 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 4vw 4vw -2vw #0007;
+    border: none;
 }
 
-foul-selection-box button {
-    border-radius: 1vw;
-    border: 3px solid #0002;
-    width: 4em;
+foul-selection-box, foul-selection-box > div {
+    justify-content: center;
+    align-items: baseline;
+}
+
+foul-selection-box p-button button.ui-button {
+    border: 2px solid #222;
+    border-radius: 50%;
     margin: 0 1em;
 }
 
-foul-selection-box button:hover {
-    color: #222;
-    border-color: #222;
+foul-selection-box p-button button.ui-button:enabled:hover {
+    border: 2px solid #222;
+    background-color: #222;
+    box-shadow: 0 1em 3em -1em #000a;
 }
 
-foul-selection-box div {
-    display: flex;
-    justify-content: center;
+foul-selection-box p-button button.ui-button:enabled:hover span {
+    color: #fff;
+}
+
+foul-selection-box p-button span {
+    width: 1.6em;
+    height: 1.6em;
+    padding: 0 !important; 
+    text-align: center;
+    line-height: 1.55em !important; 
+}
+
+/*
+    O V E R V I E W B O X
+*/
+
+overview-box {
+    padding: 0;
+    border: none;
+}
+
+overview-box button span {
+    font-size: 0.8rem;
+}
+
+overview-box div {
+    flex-direction: column;
+    align-items: center;
+}
+
+overview-box div div:first-child {
+    display: none;
+}
+
+overview-box div div:nth-child(2) {
+    margin-bottom: 2vw;
+}
+
+overview-box button.ui-button {
+    border: 2px solid #222;
+    padding: 1.5em 2.5em;
+    margin: 0 1em;
+}
+
+overview-box button.ui-button:enabled:hover, overview-box p-button[label=Spielerwechsel] button.ui-button {
+    background-color: #222;
+    border-color: #222;
+    box-shadow: 0 2em 4em -2em #000a;
+}
+
+overview-box p-button[label=Spielerwechsel] button.ui-button:hover {
+    transform: translateY(-0.5em);
+    box-shadow: 0 2.5em 4em -2em #000a;
+}
+
+overview-box .ui-button.ui-button-text-only .ui-button-text {
+    padding: 0;
+}
+
+overview-box .ui-button.ui-button-text-only:hover .ui-button-text, overview-box p-button[label=Spielerwechsel] button.ui-button .ui-button-text {
+    color: #fff;
 }
